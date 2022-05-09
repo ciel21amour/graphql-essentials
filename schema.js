@@ -7,6 +7,7 @@ const schema = buildSchema(
         lastName : String
         gender : String
         email : String
+        age : Int
     }
 
     input FriendInput {
@@ -15,6 +16,7 @@ const schema = buildSchema(
         lastName : String
         gender : String
         email : String
+        age : Int
     }
     
     type Query {
