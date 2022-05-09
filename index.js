@@ -3,6 +3,19 @@ import schema from './schema';
 import { graphqlHTTP } from 'express-graphql';
 
 
+const friendDatabase = {};
+
+class Friend {
+    constructor(id, {firstName, lastName, gender, email}) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
+    }
+}
+
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -16,11 +29,15 @@ const root = { friend : () => {
         "firstName" : "Amreen",
         "lastName" : "Shaikh",
         "gender" : "Female",
-        "email" : [ 
-            {email : "amreen.shaikh.21.05@gmail.com"},
-            {email : "amreen.rajmohmad@gmail.com"} ]
+        "email" : "amreen.shaikh.21.05@gmail.com"}
+    }, 
+    createFriend : ({input}) => {
+        let id = require('crypto').randomBytes(10).toString('hex');
+        friendDatabase[id] = input;
+        return new Friend(id, input);
+
     }
-}};
+};
 
 app.use('/graphql', graphqlHTTP ({
     schema: schema,
