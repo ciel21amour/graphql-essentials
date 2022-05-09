@@ -5,18 +5,36 @@ const schema = buildSchema(
         id : ID
         firstName : String
         lastName : String
-        gender : String
+        gender : Gender
         email : String
         age : Int
+        contacts : [Contact]
+    }
+
+    type Contact {
+        firstName : String
+        lastName : String
+    }
+
+    input ContactInput {
+        firstName : String
+        lastName : String
     }
 
     input FriendInput {
         id : ID
         firstName : String
         lastName : String
-        gender : String
+        gender : Gender
         email : String
         age : Int
+        contacts : [ContactInput]
+    }
+
+    enum Gender {
+        MALE
+        FEMALE
+        OTHER
     }
     
     type Query {
