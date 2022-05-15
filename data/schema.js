@@ -18,6 +18,14 @@ const typeDefs =
         lastName : String
     }
 
+    type Alien {
+        id : ID
+        firstName : String
+        lastName : String
+        planet : String
+    }
+
+
     input ContactInput {
         firstName : String
         lastName : String
@@ -46,6 +54,7 @@ const typeDefs =
 
     type Mutation {
         createFriend(input : FriendInput) : Friend
+        updateFriend(input : FriendInput) : Friend
     }
 
     `;

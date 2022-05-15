@@ -122,4 +122,6 @@ Thus,
 nvm use 16
 
 using findById method for query using mongo db
-
+npm install --save-dev -g node-gyp@8.4.1
+npm install --save-dev sqlite3 sequelize casual
+npm install --save-dev @types/lodash

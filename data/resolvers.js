@@ -1,4 +1,4 @@
-import { Friends } from './dbConnectors';
+import { Friends, Aliens } from './dbConnectors';
 
 // resolver map
 export const resolvers = { 
@@ -29,6 +29,19 @@ export const resolvers = {
                     }
                 });
             })
-        }
+        },
+        updateFriend : (root, {input}) => {
+            return new Promise((resolve, object) => {
+                Friends.findOneandUpdate({
+                    _id : input.id
+                }, input, { new : true }, ( err , friend) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(friend);
+                    }
+                } );
+            })
+        },
     },
 };
