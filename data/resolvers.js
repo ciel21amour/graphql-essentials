@@ -3,8 +3,19 @@ import { Friends, Aliens } from './dbConnectors';
 // resolver map
 export const resolvers = { 
     Query : {
-        getFriend : (root, {id}) => { 
-            return Friends.findById(id);
+        getOneFriend : (root, {id}) => { 
+            return new Promise((resolve, object) => {
+                Friends.findById(id, (err, friend) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(friend);
+                    }
+                });
+            });
+        }, 
+        getAliens : (root, {id}) => { 
+            return Aliens.findAll();
         }
     },
     Mutation : {
@@ -32,7 +43,7 @@ export const resolvers = {
         },
         updateFriend : (root, {input}) => {
             return new Promise((resolve, object) => {
-                Friends.findOneandUpdate({
+                Friends.findOneAndUpdate({
                     _id : input.id
                 }, input, { new : true }, ( err , friend) => {
                     if (err) {
@@ -45,7 +56,7 @@ export const resolvers = {
         },
         deleteFriend : (root, {id}) => {
             return new Promise((resolve, object) => {
-                Friends.remove({
+                Friends.deleteOne({
                     _id : id
                 }, ( err , friend) => {
                     if (err) {

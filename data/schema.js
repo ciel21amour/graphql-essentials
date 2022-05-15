@@ -49,13 +49,14 @@ const typeDefs =
     }
     
     type Query {
-        getFriend(id : ID) : Friend
+        getOneFriend(id : ID) : Friend
+        getAliens : [Alien]
     }
 
     type Mutation {
         createFriend(input : FriendInput) : Friend
         updateFriend(input : FriendInput) : Friend
-        deleteFriend(input : ID) : String
+        deleteFriend(id : ID) : String
     }
 
     `;
