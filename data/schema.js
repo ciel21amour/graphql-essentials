@@ -7,6 +7,7 @@ const typeDefs =
         firstName : String
         lastName : String
         gender : Gender
+        language : String
         email : String
         age : Int
         contacts : [Contact]
@@ -27,6 +28,7 @@ const typeDefs =
         firstName : String
         lastName : String
         gender : Gender
+        language : String
         email : String
         age : Int
         contacts : [ContactInput]

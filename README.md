@@ -106,4 +106,20 @@ getFriend : (_, {id}) => {
 add that underscore as an extra empty parameter since the function definition and syntax changed over time.  Lastly, check following link for better understanding:  https://stackoverflow.com/questions/69165638/graphql-mutation-and-query-cannot-read-property-of-undefined
 
 
+For data persistence, we are going to connect to the mongoDB
+
+npm install --save-dev mongoose
+
+install Studio 3T as GUI app for mongoDB
+https://studio3t.com/download/
+
+connection options for mongoose are not to be passed in updated version of mongoose.
+
+https://stackoverflow.com/questions/68806347/argument-of-type-usenewurlparser-boolean-useunifiedtopology-boolean-is-n 
+
+with updated version of mongoose, we must use node version 12 or higher.
+Thus, 
+nvm use 16
+
+using findById method for query using mongo db
 
