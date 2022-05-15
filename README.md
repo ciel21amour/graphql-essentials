@@ -122,4 +122,77 @@ Thus,
 nvm use 16
 
 using findById method for query using mongo db
+npm install --save-dev -g node-gyp@8.4.1
+npm install --save-dev sqlite3 sequelize casual
+npm install --save-dev @types/lodash
+
+import sequelize following way : 
+import { DataTypes, Sequelize } from 'sequelize';
+
+
+Querying with aliases : inbuilt with graphql : way to do multiple queries at the same time 
+
+query {
+  query { 
+  friend : getOneFriend(id : "dkfvndv") {
+    firstName
+    lastName
+    age
+    gender
+    language
+  }
+  aliens : getAliens {
+    firstName
+    Planet
+  }
+}
+
+------------------------------------------------ Response ------------------------------------------------
+
+{
+  "data" : {
+    "friend" : {
+
+    }
+    "aliens" : [{},{},{}]
+  } 
+}
+
+------------------------------------------------ Response End --------------------------------------------
+
+
+
+
+Querying with fragments : return similar fragment of data for multiple queries. 
+
+query { 
+  one : getOneFriend(id : "dkfvndv") {
+    ...friendFragment
+  }
+  two : getOneFriend(id : "sgdffdg") {
+    ...friendFragment
+  }
+}
+
+fragment friendFragment on Friend {
+  firstName
+  lastName
+  age
+  gender
+}
+
+------------------------------------------------ Response ------------------------------------------------
+
+{
+  "data" : {
+    "one" : {
+      
+    }
+    "two" : {
+
+    }
+  } 
+}
+
+------------------------------------------------ Response End --------------------------------------------
 

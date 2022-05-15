@@ -1,10 +1,21 @@
-import { Friends } from './dbConnectors';
+import { Friends, Aliens } from './dbConnectors';
 
 // resolver map
 export const resolvers = { 
     Query : {
-        getFriend : (root, {id}) => { 
-            return Friends.findById(id);
+        getOneFriend : (root, {id}) => { 
+            return new Promise((resolve, object) => {
+                Friends.findById(id, (err, friend) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(friend);
+                    }
+                });
+            });
+        }, 
+        getAliens : (root, {id}) => { 
+            return Aliens.findAll();
         }
     },
     Mutation : {
@@ -28,6 +39,32 @@ export const resolvers = {
                         resolve(newFriend);
                     }
                 });
+            })
+        },
+        updateFriend : (root, {input}) => {
+            return new Promise((resolve, object) => {
+                Friends.findOneAndUpdate({
+                    _id : input.id
+                }, input, { new : true }, ( err , friend) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(friend);
+                    }
+                } );
+            })
+        },
+        deleteFriend : (root, {id}) => {
+            return new Promise((resolve, object) => {
+                Friends.deleteOne({
+                    _id : id
+                }, ( err , friend) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve('Successfully deleted friend!');
+                    }
+                } );
             })
         }
     },

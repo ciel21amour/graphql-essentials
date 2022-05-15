@@ -18,6 +18,14 @@ const typeDefs =
         lastName : String
     }
 
+    type Alien {
+        id : ID
+        firstName : String
+        lastName : String
+        planet : String
+    }
+
+
     input ContactInput {
         firstName : String
         lastName : String
@@ -41,11 +49,14 @@ const typeDefs =
     }
     
     type Query {
-        getFriend(id : ID) : Friend
+        getOneFriend(id : ID) : Friend
+        getAliens : [Alien]
     }
 
     type Mutation {
         createFriend(input : FriendInput) : Friend
+        updateFriend(input : FriendInput) : Friend
+        deleteFriend(id : ID) : String
     }
 
     `;

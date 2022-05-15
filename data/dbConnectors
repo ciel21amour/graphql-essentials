@@ -1,4 +1,7 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import { DataTypes, Sequelize } from 'sequelize';
+import _ from 'lodash';
+import casual from 'casual';
 
 // Mongo connection
 mongoose.Promise = global.Promise;
@@ -30,4 +33,35 @@ const friendSchema = new mongoose.Schema({
 
 const Friends = mongoose.model('friends', friendSchema);
 
-export {Friends};
+// sql
+
+const sequelize = new Sequelize('database', null, null, {
+    dialect : 'sqlite',
+    storage : './alien.sqlite',
+} );
+
+const Aliens = sequelize.define('aliens', {
+    firstName : {
+        type: DataTypes.STRING
+    },
+    lastName : {
+        type: DataTypes.STRING
+    },
+    planet : {
+        type: DataTypes.STRING
+    },
+
+});
+
+Aliens.sync({ force : true }).then(() => {
+    _.times(10, (i) => {
+        Aliens.create({ 
+            firstName : casual.first_name,
+            lastName : casual.last_name,
+            planet : casual.word
+        });
+    });
+});
+
+
+export {Friends, Aliens};
